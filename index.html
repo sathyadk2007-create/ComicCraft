@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ComicCraft</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        textarea, input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            cursor: pointer;
+            font-size: 16px;
+            background: #222;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .comic {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .panel {
+            min-height: 230px;
+            border: 4px solid #222;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            background: #dff5d8;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .panel:nth-child(2) {
+            background: #d8efff;
+        }
+
+        .panel:nth-child(3) {
+            background: #fff0b8;
+        }
+
+        .panel:nth-child(4) {
+            background: #eadcff;
+        }
+
+        .scene {
+            font-size: 65px;
+            margin-top: 25px;
+        }
+
+        .speech {
+            background: white;
+            border: 2px solid #222;
+            border-radius: 15px;
+            padding: 8px;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            .comic {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>ComicCraft</h1>
+<p>Create your own comic!</p>
+
+<label>Story Prompt</label>
+
+<textarea id="story" rows="6"
+placeholder="Enter your comic story here...">A young girl gets lost in a magical forest. She meets a friendly talking bird who helps her find the way home. Along the journey, they discover a hidden treasure and learn that friendship is more valuable than gold. In the end, the girl safely returns home with a happy heart.</textarea>
+
+<label>Character Name</label>
+<input type="text" id="character" value="Young Girl">
+
+<label>Setting</label>
+<select id="setting">
+    <option>Forest</option>
+    <option>School</option>
+    <option>City</option>
+    <option>Village</option>
+    <option>Space</option>
+</select>
+
+<label>Story Tone</label>
+<select id="tone">
+    <option>Funny</option>
+    <option>Adventure</option>
+    <option>Emotional</option>
+    <option>Mystery</option>
+</select>
+
+<label>Art Style</label>
+<select id="style">
+    <option>Anime</option>
+    <option>Cartoon</option>
+    <option>Comic Book</option>
+</select>
+
+<button onclick="generateComic()">Generate Comic</button>
+
+<div id="result"></div>
+
+<script>
+
+function generateComic() {
+
+    const story = document.getElementById("story").value;
+    const character = document.getElementById("character").value;
+    const setting = document.getElementById("setting").value;
+    const tone = document.getElementById("tone").value;
+    const style = document.getElementById("style").value;
+
+    if (story.trim() === "") {
+        alert("Please enter a story prompt.");
+        return;
+    }
+
+    const result = document.getElementById("result");
+
+    result.style.display = "block";
+
+    result.innerHTML = `
+
+        <h2>🎨 Comic Generated!</h2>
+
+        <p><b>Character:</b> ${character}</p>
+        <p><b>Setting:</b> ${setting}</p>
+        <p><b>Tone:</b> ${tone}</p>
+        <p><b>Art Style:</b> ${style}</p>
+
+        <div class="comic">
+
+            <div class="panel">
+                <h3>Panel 1</h3>
+                <div class="scene">👧🌲🌲</div>
+                <div class="speech">
+                    ${character}: "Where am I?"
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3>Panel 2</h3>
+                <div class="scene">👧 🐦🌳</div>
+                <div class="speech">
+                    Bird: "Don't worry! I'll help you!"
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3>Panel 3</h3>
+                <div class="scene">👧 🐦 💰💎</div>
+                <div class="speech">
+                    "We found a hidden treasure!"
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3>Panel 4</h3>
+                <div class="scene">🏠 👧 ❤️</div>
+                <div class="speech">
+                    "Friendship is more valuable than gold!"
+                </div>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <p><b>Your comic story is ready! 🎉</b></p>
+    `;
+}
+
+</script>
+
+</body>
+</html>
